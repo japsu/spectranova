@@ -1,5 +1,6 @@
 var minDelay = 300; // milliseconds
 var maxDelay = 1000;
+var maxLogLines = 15;
 
 // some line template functions have state
 var powerSaveStubCallTimes = 0;
@@ -66,6 +67,11 @@ function appendLogLine(logLine) {
   $logLine.textContent = logLine;
   document.getElementById('log').appendChild($logLine);
   $logLine.scrollIntoView();
+
+  while (document.querySelectorAll('#log div').length > maxLogLines) {
+    var $lineToRemove = document.querySelector('#log div');
+    $lineToRemove.parentElement.removeChild($lineToRemove);
+  }
 }
 
 
